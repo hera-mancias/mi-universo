@@ -1,0 +1,1395 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MI UNIVERSO</title>
+    <style>
+        /* ESTILOS BASE: NEGRO PROFUNDO, ROSA ALGODÓN Y BLANCO */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            /* Fondo NEGRO MÍSTICO */
+            background: linear-gradient(135deg, #10001a 0%, #000000 100%); 
+            color: #ffffff; /* Letras BLANCAS para el fondo oscuro */
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            box-sizing: border-box;
+            padding-top: 130px; /* ESPACIO AUMENTADO para el banner de urgencia */
+        }
+
+        /* ANIMACIONES COSMICAS */
+        @keyframes moonShine {
+            0% { text-shadow: 0 0 5px rgba(255, 105, 180, 0.5); transform: scale(1); }
+            50% { text-shadow: 0 0 15px rgba(255, 105, 180, 1.0); transform: scale(1.1); }
+            100% { text-shadow: 0 0 5px rgba(255, 105, 180, 0.5); transform: scale(1); }
+        }
+        @keyframes pulseAlert {
+            0% { box-shadow: 0 0 0 0 rgba(255, 223, 0, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(255, 223, 0, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(255, 223, 0, 0); }
+        }
+        @keyframes float { /* Animación de flotación para los iconos del menú */
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-2px); }
+            100% { transform: translateY(0px); }
+        }
+        @keyframes rotateGanesha { /* Animación de rotación para Ganesha */
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+
+        /* CABECERA Y NAVEGACIÓN */
+        .header-container {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 10;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+            background-color: rgba(26, 26, 26, 0.95); /* Negro semi-transparente para la cabecera */
+        }
+        .header {
+            text-align: center;
+            padding: 10px 0;
+            color: #ff69b4; /* Rosa Intenso para el título */
+            font-size: 1.5em;
+            font-weight: bold;
+            border-bottom: 1px solid #ffb6c1; /* Rosa más suave */
+        }
+        
+        /* BANNER DE URGENCIA */
+        .urgent-alert {
+            background-color: #ffd700; /* Dorado para llamar la atención */
+            color: #1a1a1a;
+            padding: 5px 0;
+            font-size: 0.9em;
+            font-weight: bold;
+            animation: pulseAlert 1.5s infinite;
+            cursor: pointer;
+        }
+
+        /* BARRA DE NAVEGACIÓN */
+        .navbar {
+            display: flex;
+            justify-content: space-around;
+            width: 100%;
+            background-color: rgba(26, 26, 26, 0.9); /* Negro semi-transparente para la barra */
+            padding: 5px 0;
+        }
+        .navbar-item {
+            text-align: center;
+            color: #ffffff; /* Texto de menú en BLANCO */
+            cursor: pointer;
+            padding: 10px 10px;
+            font-size: 0.8em; 
+            transition: color 0.3s;
+        }
+        .navbar-item.active {
+            color: #ff69b4; /* Pestaña activa en Rosa Intenso */
+            border-bottom: 2px solid #ff69b4;
+        }
+        .navbar-item span { /* ANIMACIÓN PARA LOS ICONOS DEL MENÚ (NUEVO) */
+            display: block;
+            font-size: 1.2em;
+            margin-bottom: 3px;
+            animation: float 3s infinite alternate;
+        }
+
+        /* CONTENIDO PRINCIPAL */
+        .content {
+            padding: 20px; 
+            display: none;
+            width: 100%;
+            max-width: 450px;
+            position: relative; 
+            z-index: 2;
+            background-color: rgba(0, 0, 0, 0.5); /* Fondo oscuro semi-transparente para el contenido principal */
+            border-radius: 10px;
+            color: white;
+        }
+        .content.active {
+            display: block;
+        }
+
+        h2 {
+            color: #ff69b4; /* Rosa Intenso */
+            border-bottom: 2px solid #ffb6c1;
+            padding-bottom: 10px;
+            margin-bottom: 25px;
+            font-size: 1.6em;
+            text-align: center;
+        }
+
+        /* ESTILO FASE LUNAR (DESTACADO) */
+        .fase-lunar-box {
+            padding: 20px;
+            border: 2px solid #ffb6c1; /* Rosa Algodón */
+            border-radius: 10px;
+            background-color: rgba(255, 255, 255, 0.9); /* Fondo Blanco (efecto nube) */
+            margin-bottom: 20px;
+            text-align: center;
+            color: #1a1a1a; /* Texto oscuro en la caja clara */
+        }
+        .moon-symbol {
+            font-size: 2.5em;
+            color: #ff69b4; /* Símbolo en Rosa Intenso */
+            display: block;
+            margin-bottom: 5px;
+            animation: moonShine 4s infinite ease-in-out; 
+        }
+        .info {
+            color: #ff69b4; /* Rosa Intenso */
+            font-weight: bold;
+        }
+        .influence-detail {
+            font-size: 0.9em;
+            margin-top: 5px;
+            color: #555;
+        }
+        
+        /* ESTILO HORÓSCOPO GRATIS */
+        #horoscopo-gratis-section {
+            background-color: rgba(255, 255, 255, 0.9); /* Fondo Blanco (efecto nube) */
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            text-align: center;
+            color: #1a1a1a;
+        }
+        #horoscopo-gratis-section input {
+             width: 90%;
+             padding: 10px;
+             margin: 5px 0;
+             border: 1px solid #ffb6c1;
+             border-radius: 5px;
+             box-sizing: border-box;
+             color: #1a1a1a; /* Texto de input negro */
+             background-color: #f0f0f0;
+        }
+        #horoscopo-resultado {
+            margin-top: 15px;
+            padding: 10px;
+            border-top: 1px dashed #ff69b4;
+            display: none; /* Oculto inicialmente */
+        }
+        .loading-text {
+            color: #ff69b4;
+            font-size: 0.9em;
+            margin-top: 10px;
+        }
+        
+        /* ESTILO CALENDARIO VISUAL */
+        .calendar-container {
+            background-color: rgba(255, 255, 255, 0.9);
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            padding: 15px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            margin-bottom: 20px;
+            color: #1a1a1a;
+        }
+        .calendar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            color: #1a1a1a;
+        }
+        .calendar-header h3 {
+            margin: 0;
+            color: #ff69b4;
+        }
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 5px;
+            font-size: 0.8em;
+            text-align: center;
+        }
+        .day-name {
+            font-weight: bold;
+            color: #555;
+        }
+        .day-number {
+            padding: 5px;
+            border-radius: 4px;
+            background-color: #f0f0f0;
+            cursor: pointer;
+        }
+        .current-day {
+            background-color: #ff69b4; /* Día actual en Rosa Intenso */
+            color: white;
+            font-weight: bold;
+        }
+
+
+        /* GRUPO DE BOTONES NUBE */
+        .button-group {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap; /* Permite que los botones bajen si no caben */
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        /* BOTONES DE ACCIÓN EN FORMA DE NUBE */
+        .action-button {
+            flex-grow: 1; /* Permite que el botón crezca para ocupar espacio */
+            padding: 12px 10px;
+            background-color: #ffb6c1; /* Rosa Algodón */
+            color: #000000; /* Texto Negro para contraste */
+            border: none;
+            border-radius: 25px; /* ¡Forma de Nube/Pastilla! */
+            cursor: pointer;
+            font-weight: bold;
+            transition: background-color 0.3s;
+            margin: 0; /* Elimina márgenes extra */
+            width: auto; /* Ancho automático, no 90% */
+            min-width: 45%; /* Asegura que al menos quepan dos por línea */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            font-size: 0.9em;
+        }
+        .action-button.tarot {
+            background-color: #ffd700; /* Dorado Suave para el Tarot (PAGO) */
+            color: #000000;
+        }
+        .action-button:hover {
+            background-color: #ff69b4; /* Rosa más intenso al pasar el ratón */
+            color: white;
+        }
+        .action-button.astrology {
+            background-color: #d1b6ff; /* Morado/Lila Suave para Astrología */
+        }
+
+
+        /* ESTILO ESPECÍFICO DE AFIRMACIONES */
+        .afirmacion-box {
+            background-color: #fff0f5; /* Rosa muy suave */
+            padding: 25px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            text-align: center;
+            border: 2px solid #ffb6c1;
+            box-shadow: 0 0 15px rgba(255, 105, 180, 0.2);
+            color: #1a1a1a;
+        }
+        .afirmacion-text {
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #000000;
+            margin-bottom: 15px;
+            min-height: 50px;
+        }
+        .afirmacion-figure {
+            margin: 10px auto;
+            max-width: 100px;
+            height: 100px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 4em;
+            border-radius: 50%;
+            border: 3px solid;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            animation: rotateGanesha 10s infinite linear;
+        }
+        #afirmacion-paywall-button {
+            width: 100%;
+            margin-top: 15px;
+            display: none;
+        }
+
+
+        /* MODALES */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 20;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.8);
+            padding-top: 60px;
+        }
+        .modal-content {
+            background-color: #ffffff;
+            margin: 5% auto;
+            padding: 20px;
+            border: 1px solid #ffb6c1;
+            width: 80%;
+            max-width: 350px;
+            border-radius: 10px;
+            box-shadow: 0 0 30px rgba(255, 105, 180, 0.4);
+            color: #333;
+        }
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+        .close:hover, .close:focus {
+            color: #ff69b4;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        .modal-content input, .modal-content textarea {
+            width: 90%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ffb6c1;
+            background-color: #fff;
+            color: #333;
+            border-radius: 5px;
+            box-sizing: border-box;
+            resize: vertical;
+        }
+
+        /* Estilo de los servicios (Botones de pago) */
+        .service-box {
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            background-color: #fff0f5;
+            text-align: center;
+            color: #333;
+        }
+        .service-box .price {
+            font-size: 1.4em;
+            color: #ff69b4;
+            font-weight: bold;
+            display: block;
+            margin: 5px 0;
+        }
+        .service-box button {
+            background-color: #ffd700;
+            color: #000000;
+        }
+
+        /* Estilo para mostrar la carta revelada */
+        #tarotResultado {
+            margin-top: 20px;
+            padding: 15px;
+            border: 1px solid #ffb6c1;
+            border-radius: 8px;
+            background-color: #ffffff;
+            text-align: center;
+        }
+        #tarotResultado h4 {
+            color: #ff69b4;
+            margin: 0 0 10px 0;
+        }
+        #tarotResultado p {
+            color: #333;
+            font-size: 0.9em;
+        }
+
+        /* ESTILO ESPECÍFICO DE TU ESPACIO (Servicios) */
+        .service-item-box {
+            background-color: rgba(255, 255, 255, 0.95);
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            color: #1a1a1a;
+            text-align: left;
+        }
+        .service-item-box h4 {
+            color: #ff69b4;
+            margin: 0 0 5px 0;
+            font-size: 1.1em;
+        }
+        .service-item-box .description {
+            font-size: 0.9em;
+            color: #555;
+            margin-bottom: 10px;
+        }
+        .service-item-box .price-tag {
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #000000;
+            display: inline-block;
+            margin-right: 15px;
+        }
+        
+        /* ESTILO DE BOTONES DE REDES SOCIALES */
+        .social-button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 12px;
+            margin: 10px 0;
+            border-radius: 8px;
+            font-weight: bold;
+            text-decoration: none;
+            color: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: transform 0.2s;
+            font-size: 1em;
+        }
+        .social-button:hover {
+            transform: translateY(-2px);
+        }
+        .whatsapp-button {
+            background-color: #25d366;
+        }
+        .tiktok-button {
+            background-color: #000000;
+        }
+        .email-button {
+            background-color: #ff69b4;
+        }
+        .social-icon {
+            font-size: 1.4em;
+            margin-right: 10px;
+        }
+
+
+    </style>
+</head>
+<body>
+
+    <!-- CABECERA Y NAVEGACIÓN -->
+    <div class="header-container">
+        <div class="urgent-alert" onclick="openUrgentReadingModal()">
+            LECTURA URGENTE EN 30 MINUTOS 50€ | ¡TOCA AQUÍ!
+        </div>
+        <div class="header">
+            MI UNIVERSO
+        </div>
+        <div class="navbar" id="navbar">
+            <!-- Pestañas se añadirán dinámicamente aquí -->
+        </div>
+    </div>
+
+    <!-- PESTAÑA 1: CALENDARIO -->
+    <div id="calendario" class="content active">
+        <h2>✨ CALENDARIO CÓSMICO ✨</h2>
+        
+        <div class="fase-lunar-box">
+            <span id="moonSymbol" class="moon-symbol"></span>
+            <p style="font-size: 1.3em;">Fase Lunar Hoy: <span id="faseLunarActual" class="info"></span></p>
+            <p style="font-size: 0.9em;">Día, Mes y Hora Exacta: <span id="fechaActual" class="info"></span></p>
+            
+            <hr style="border: 0; height: 1px; background-color: #ffb6c1; margin: 15px 0;">
+
+            <p style="font-size: 1.1em; font-weight: bold;">🌌 Influencia Astrológica del Día 🌌</p>
+            <p id="influenciaPlanetaria" class="influence-detail">Planeta Regente: </p>
+            <p id="influenciaColor" class="influence-detail">Color de Poder: </p>
+            <p id="influenciaMensaje" class="influence-detail">Mensaje Místico: </p>
+
+            <p id="astrologyLoading" class="loading-text" style="display: none;">Generando predicción...</p>
+            <button class="action-button astrology" onclick="obtenerInfluenciaDiaria(this)">
+                ACTUALIZAR INFLUENCIA CÓSMICA
+            </button>
+        </div>
+
+        <!-- PREDICCIÓN HORÓSCOPO DIARIA GRATIS -->
+        <div id="horoscopo-gratis-section">
+            <h3 style="color: #ff69b4; margin-bottom: 10px;">PREDICCIÓN HORÓSCOPO DIARIA (GRATIS)</h3>
+            <p style="font-size: 0.8em; color: #666; margin-bottom: 10px;">Introduce tu nombre y fecha para ver la predicción correcta:</p>
+            
+            <input type="text" id="nombreHoroscopo" placeholder="Tu Nombre">
+            <input type="date" id="fechaHoroscopo" placeholder="Fecha de Nacimiento">
+            
+            <button class="action-button" onclick="obtenerHoroscopoGratis()">VER MI HORÓSCOPO DE HOY</button>
+
+            <div id="horoscopo-resultado" style="margin-top: 15px; display: none;">
+                <p style="font-weight: bold;">Tu Signo: <span id="signoResult"></span></p>
+                <p id="prediccionResult"></p>
+                <p style="font-size: 0.8em; color: #ff69b4;">*Para la predicción completa de 12 signos, visita la pestaña SERVICIOS.</p>
+            </div>
+            <p id="horoscopoLoading" class="loading-text" style="display: none;">Calculando tu destino...</p>
+        </div>
+
+
+        <!-- CALENDARIO VISUAL -->
+        <div class="calendar-container">
+            <div class="calendar-header">
+                <button onclick="changeMonth(-1)">&#9664;</button>
+                <h3 id="currentMonthYear"></h3>
+                <button onclick="changeMonth(1)">&#9654;</button>
+            </div>
+            <div id="calendarGrid" class="calendar-grid">
+                <!-- Días de la semana y números se insertan con JS -->
+            </div>
+        </div>
+
+        <!-- GRUPO DE BOTONES NUBE -->
+        <div class="button-group">
+            <button class="action-button" onclick="openDreamModal()">
+                SOÑADOR (Añadir Sueños)
+            </button>
+
+            <button class="action-button tarot" onclick="openTarotModal()">
+                TAROT: 2 CARTAS (Guía Gratis + Pago)
+            </button>
+        </div>
+        <p style="text-align: center; color: #666;">*Se requiere pago para la lectura completa de Tarot.</p>
+        
+    </div>
+
+    <!-- PESTAÑA 2: AFIRMACIONES -->
+    <div id="afirmaciones" class="content">
+        <h2 style="margin-bottom: 20px;">✨ AFIRMACIONES DIARIAS ✨</h2>
+        
+        <!-- Contenedor para la carta revelada -->
+        <div id="cardContainer" class="afirmacion-box" style="min-height: 250px;">
+            <p style="font-weight: bold; color: #ff69b4;">Toca el botón para recibir tu mensaje.</p>
+            <p style="font-size: 0.9em; color: #666;">Afirmaciones positivas y guía visual de los Susurros del Dios Ganesha.</p>
+        </div>
+        
+        <button id="sacarCartaBtn" class="action-button" style="width: 100%; margin-top: 20px;" onclick="sacarCartaAfirmacion(this)">
+            SACAR CARTA DE AFIRMACIÓN
+        </button>
+        
+        <!-- MURO DE PAGO Y SUSCRIPCIÓN (Se muestra DESPUÉS de la carta gratuita) -->
+        <div id="afirmacionPaywall" style="display: none;">
+            <h3 style="color: #ff69b4; text-align: center; border-bottom: none; margin-top: 30px;">SUSCRIPCIÓN DE AFIRMACIONES</h3>
+            <div class="service-box">
+                <p style="font-size: 1.1em; font-weight: bold;">Recibe Afirmación Diaria en tu Correo</p>
+                <span class="price">0.99€ / mes</span>
+                <p style="font-size: 0.8em; color: #666;">*Se requiere tu conexión personal (email) para activar la suscripción y el envío diario.</p>
+                <button class="action-button tarot" onclick="openModal('accessModal', 'AFIRMACIONES_MENSUAL_099')">
+                    SUSCRIBIRSE POR 0.99€/MES
+                </button>
+            </div>
+        </div>
+        
+        <h3 style="color: #ff69b4; text-align: center; border-bottom: none; margin-top: 30px;">MENSAJES DE ALMA GEMELA (SUSCRIPCIÓN)</h3>
+        <div class="button-group" style="margin-top: 15px;">
+            <!-- DIARIA (3€) -->
+            <div class="service-item-box" style="width: 45%; color: white; background-color: #4a007a;">
+                <h4 style="color: white;">Mensaje DIARIO (1 al día)</h4>
+                <div class="description" style="color: #ffb6c1;">Guía diaria y predictiva de tu Alma Gemela.</div>
+                <span class="price-tag" style="color: #ffd700;">3.00€</span>
+                <button class="action-button tarot" onclick="openModal('accessModal', 'ALMA_GEMELA_DIARIA_3')">PAGAR 3.00€</button>
+            </div>
+            <!-- SEMANAL (5.99€) -->
+            <div class="service-item-box" style="width: 45%; color: white; background-color: #4a007a;">
+                <h4 style="color: white;">Mensaje SEMANAL (1 a la semana)</h4>
+                <div class="description" style="color: #ffb6c1;">Predicción semanal para la conexión de tu Alma Gemela.</div>
+                <span class="price-tag" style="color: #ffd700;">5.99€</span>
+                <button class="action-button tarot" onclick="openModal('accessModal', 'ALMA_GEMELA_SEMANAL_599')">PAGAR 5.99€</button>
+            </div>
+        </div>
+
+        <h3 style="color: #ff69b4; text-align: center; border-bottom: none; margin-top: 30px;">PREDICCIONES ADICIONALES</h3>
+        <div class="button-group" style="margin-top: 15px;">
+            <div class="service-item-box" style="width: 45%;">
+                <h4 style="color: #ff69b4;">Suscripción: Semanal</h4>
+                <div class="description">Horóscopo expandido y Carta Astral.</div>
+                <span class="price-tag">3.29€</span>
+                <button class="action-button tarot" onclick="openModal('accessModal', 'PREDICCION_SEMANAL_329')">PAGAR 3.29€</button>
+            </div>
+            <div class="service-item-box" style="width: 45%;">
+                <h4 style="color: #ff69b4;">Suscripción: Por Vida</h4>
+                <div class="description">Acceso de por vida a predicciones y recordatorios.</div>
+                <span class="price-tag">32.99€</span>
+                <button class="action-button tarot" onclick="openModal('accessModal', 'PREDICCION_POR_VIDA_3299')">PAGAR 32.99€</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- PESTAÑA 3: TU ESPACIO (LECTURAS Y RITUALES) -->
+    <div id="tu_espacio" class="content">
+        <h2>TU ESPACIO Y OFERTAS ESPECIALES</h2>
+        
+        <!-- CARPETA 1: LECTURAS RÁPIDAS Y TAROT -->
+        <h3 style="color: #ff69b4; text-align: center; border-bottom: none; margin-top: 30px;">🃏 LECTURAS RÁPIDAS Y TAROT</h3>
+        <div class="button-group" style="margin-top: 15px;">
+            
+             <!-- 1. CARTA SÍ O NO (1€) -->
+            <div class="service-item-box">
+                <h4>1 Carta SÍ o NO</h4>
+                <div class="description">Respuesta inmediata a una pregunta específica.</div>
+                <div class="price-tag">1€</div>
+                <button class="action-button tarot" onclick="openModal('accessModal', 'LECTURA_SI_NO_1')">PAGAR 1€</button>
+            </div>
+            
+            <!-- 2. LECTURA 3 CARTAS (5€) -->
+            <div class="service-item-box">
+                <h4>3 Cartas + 1 Pregunta</h4>
+                <div class="description">Lectura enfocada en el presente, pasado o futuro.</div>
+                <div class="price-tag">5€</div>
+                <button class="action-button tarot" onclick="openModal('accessModal', 'LECTURA_3_CARTAS_5')">PAGAR 5€</button>
+            </div>
+            
+            <!-- 3. LECTURA 3 CARTAS + ACTIVACIÓN ANGÉLICAL (7€) -->
+            <div class="service-item-box">
+                <h4>3 Cartas + Act. Angélical</h4>
+                <div class="description">Guía de 3 cartas con un mensaje de alta vibración de tus ángeles.</div>
+                <div class="price-tag">7€</div>
+                <button class="action-button tarot" onclick="openModal('accessModal', 'LECTURA_3_ANGELICAL_7')">PAGAR 7€</button>
+            </div>
+
+            <!-- 4. TIRADA GENERAL (11€) -->
+            <div class="service-item-box">
+                <h4>Tirada General</h4>
+                <div class="description">Visión completa de tu energía actual y retos a superar.</div>
+                <div class="price-tag">11€</div>
+                <button class="action-button tarot" onclick="openModal('accessModal', 'TIRADA_GENERAL_11')">PAGAR 11€</button>
+            </div>
+            
+            <!-- 5. LECTURA GENERAL + ACTIVACIÓN ANGÉLICAL (13€) -->
+            <div class="service-item-box">
+                <h4>General + Act. Angélical</h4>
+                <div class="description">Lectura profunda combinada con una activación energética.</div>
+                <div class="price-tag">13€</div>
+                <button class="action-button tarot" onclick="openModal('accessModal', 'LECTURA_GENERAL_ANGELICAL_13')">PAGAR 13€</button>
+            </div>
+        </div>
+
+        <!-- CARPETA 2: RITUALES DE MAGIA -->
+        <h3 style="color: #ff69b4; text-align: center; border-bottom: none; margin-top: 30px;">🌙 RITUALES DE MAGIA</h3>
+        <div class="button-group" style="margin-top: 15px;">
+             <!-- Ritual de Limpieza Espiritual -->
+            <div class="service-item-box">
+                <h4>Ritual de Limpieza</h4>
+                <div class="description">Ritual profesional para limpiar energías negativas.</div>
+                <div class="price-tag">25€</div>
+                <button class="action-button tarot" onclick="openModal('accessModal', 'RITUAL_LIMPIEZA_25')">PAGAR 25€</button>
+            </div>
+             <!-- Ritual de Amor -->
+            <div class="service-item-box">
+                <h4>Ritual de Amor</h4>
+                <div class="description">Ritual para atraer el amor a tu vida.</div>
+                <div class="price-tag">35€</div>
+                <button class="action-button tarot" onclick="openModal('accessModal', 'RITUAL_AMOR_35')">PAGAR 35€</button>
+            </div>
+            <!-- Ritual de Economía -->
+            <div class="service-item-box">
+                <h4>Ritual de Economía</h4>
+                <div class="description">Ritual para mejorar la economía y atraer abundancia.</div>
+                <div class="price-tag">70€</div>
+                <button class="action-button tarot" onclick="openModal('accessModal', 'RITUAL_ECONOMIA_70')">PAGAR 70€</button>
+            </div>
+            <!-- Ritual de Salud -->
+            <div class="service-item-box">
+                <h4>Ritual de Salud</h4>
+                <div class="description">Ritual para mejorar la salud.</div>
+                <div class="price-tag">90€</div>
+                <button class="action-button tarot" onclick="openModal('accessModal', 'RITUAL_SALUD_90')">PAGAR 90€</button>
+            </div>
+             <!-- Ritual Amansamiento -->
+            <div class="service-item-box">
+                <h4>Ritual Amansamiento</h4>
+                <div class="description">Ritual de amansamiento.</div>
+                <div class="price-tag">120€</div>
+                <button class="action-button tarot" onclick="openModal('accessModal', 'RITUAL_AMANSAMIENTO_120')">PAGAR 120€</button>
+            </div>
+             <!-- Ritual de Separación -->
+            <div class="service-item-box">
+                <h4>Ritual de Separación</h4>
+                <div class="description">Ritual para causar una separación.</div>
+                <div class="price-tag">150€</div>
+                <button class="action-button tarot" onclick="openModal('accessModal', 'RITUAL_SEPARACION_150')">PAGAR 150€</button>
+            </div>
+             <!-- Ritual Santa Muerte -->
+            <div class="service-item-box">
+                <h4>Ritual Santa Muerte</h4>
+                <div class="description">Ritual con Santa Muerte.</div>
+                <div class="price-tag">150€</div>
+                <button class="action-button tarot" onclick="openModal('accessModal', 'RITUAL_SANTA_MUERTE_150')">PAGAR 150€</button>
+            </div>
+             <!-- Muñeco Manipulación -->
+            <div class="service-item-box">
+                <h4>Muñeco Manipulación</h4>
+                <div class="description">Ritual con muñeco de manipulación.</div>
+                <div class="price-tag">170€</div>
+                <button class="action-button tarot" onclick="openModal('accessModal', 'MUNECO_MANIPULACION_170')">PAGAR 170€</button>
+            </div>
+        </div>
+
+        <!-- CARPETA 3: OFERTAS Y TALLERES AVANZADOS -->
+        <h3 style="color: #ff69b4; text-align: center; border-bottom: none; margin-top: 30px;">🎓 TALLERES Y OFERTAS AVANZADAS</h3>
+        <div class="button-group" style="margin-top: 15px;">
+             <!-- Retrato de Alma Gemela -->
+            <div class="service-item-box">
+                <h4>Retrato de Alma Gemela</h4>
+                <div class="description">Lectura profunda e ilustración espiritual.</div>
+                <div class="price-tag">50€</div>
+                <button class="action-button tarot" onclick="openModal('accessModal', 'RETRATO_ALMA_GEMELA_50')">PAGAR 50€</button>
+            </div>
+             <!-- Lectura Personal y Directa -->
+            <div class="service-item-box">
+                <h4>Lectura Personal y Directa</h4>
+                <div class="description">Sesión 1 a 1 para guía completa.</div>
+                <div class="price-tag">50€</div>
+                <button class="action-button tarot" onclick="openModal('accessModal', 'LECTURA_PERSONAL_50')">PAGAR 50€</button>
+            </div>
+             <!-- Taller Almas Llama Gemelas -->
+            <div class="service-item-box">
+                <h4>Taller Almas Llama Gemelas</h4>
+                <div class="description">Curso completo sobre la conexión de almas.</div>
+                <div class="price-tag">60€</div>
+                <button class="action-button tarot" onclick="openModal('accessModal', 'TALLER_LLAMAS_60')">PAGAR 60€</button>
+            </div>
+             <!-- Taller Tarot 111 -->
+            <div class="service-item-box">
+                <h4>Taller Tarot 111</h4>
+                <div class="description">Formación avanzada en tarot.</div>
+                <div class="price-tag">111€</div>
+                <button class="action-button tarot" onclick="openModal('accessModal', 'TALLER_TAROT_111')">PAGAR 111€</button>
+            </div>
+             <!-- Oferta de Ritual + Afirmaciones -->
+            <div class="service-item-box">
+                <h4>Ritual + Afirmaciones (Oferta)</h4>
+                <div class="description">Ritual de Limpieza + 1 Mes Afirmaciones.</div>
+                <span class="price-tag">42€</span>
+                <button class="action-button tarot" onclick="openModal('accessModal', 'OFERTA_LIMPIEZA_42')">PAGAR 42€</button>
+            </div>
+             <!-- Afirmaciones Diarias (Estándar) -->
+            <div class="service-item-box">
+                <h4>Afirmaciones Diarias (Estándar)</h4>
+                <div class="description">Suscripción mensual de Afirmaciones.</div>
+                <span class="price-tag">15.99€</span>
+                <button class="action-button tarot" onclick="openModal('accessModal', 'AFIRMACIONES_ESTANDAR_1599')">PAGAR 15.99€</button>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- PESTAÑA 4: CONTACTO -->
+    <div id="contacto" class="content">
+        <h2>CONTACTO DIRECTO</h2>
+        
+        <h3 style="color: #ff69b4; text-align: center; border-bottom: none; margin-top: 30px;">PAGOS Y COMPROBANTES</h3>
+        
+        <div class="service-item-box">
+            <h4>1. Confirma tu Pago (WhatsApp)</h4>
+            <div class="description">Haz clic aquí para enviar el comprobante de pago de cualquier servicio.</div>
+            <a href="https://wa.me/34666636723?text=Hola%2C%20soy%20%5BNombre%5D%20y%20acabo%20de%20realizar%20un%20pago%20por%20un%20servicio." class="social-button whatsapp-button">
+                <span class="social-icon">💬</span> ENVIAR COMPROBANTE AHORA
+            </a>
+        </div>
+        
+        <!-- LECTURA URGENTE EN 30 MINUTOS (Botón debajo de la confirmación) -->
+        <div class="service-item-box" style="border: 2px solid #ffd700;">
+            <h4>🌟 LECTURA URGENTE (30 MINUTOS)</h4>
+            <div class="description">Guía inmediata. ¡Servicio Prioritario!</div>
+            <span class="price-tag" style="color: #ffd700;">50€</span>
+            <button class="action-button tarot" onclick="openModal('accessModal', 'LECTURA_URGENTE_50')">PAGAR Y SOLICITAR URGENCIA</button>
+        </div>
+
+
+        <div class="service-item-box">
+            <h4>3. Reserva o Duda Rápida</h4>
+            <div class="description">Agenda tu cita o consulta cualquier duda sobre un ritual o taller.</div>
+            <a href="https://wa.me/34666636723?text=Hola%2C%20soy%20%5BNombre%5D%20y%20me%20gustar%C3%ADa%20consultar%20sobre%20un%20servicio." class="social-button whatsapp-button">
+                 <span class="social-icon">📅</span> WHATSAPP DIRECTO
+            </a>
+        </div>
+        
+        <h3 style="color: #ff69b4; text-align: center; border-bottom: none; margin-top: 30px;">REDES Y DATOS</h3>
+        
+        <div class="service-item-box">
+            <h4>Sigue a TU UNIVERSO</h4>
+            <div class="description">Conéctate para ver contenido gratuito y sorteos.</div>
+            <a href="https://www.tiktok.com/@HERAMANCIAS" target="_blank" class="social-button tiktok-button">
+                <span class="social-icon">🎵</span> TIKTOK (@HERAMANCIAS)
+            </a>
+        </div>
+
+        <div class="service-item-box">
+            <h4>Contacto General</h4>
+            <div class="description">Para consultas administrativas o soporte.</div>
+            <a href="mailto:NUMENBLANCO@GMAIL.COM" class="social-button email-button">
+                <span class="social-icon">📧</span> NUMENBLANCO@GMAIL.COM
+            </a>
+        </div>
+    </div>
+
+
+    <!-- MODALES Y SCRIPTS -->
+    <div id="accessModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('accessModal')">&times;</span>
+            <h2 style="text-align: center;">Acceso a Suscripción</h2>
+            <p style="color: #666; text-align: center;">¡Gracias! Antes de pagar, necesitamos tus datos para activar el servicio:</p>
+            
+            <input type="text" id="modalNombre" placeholder="Tu Nombre">
+            <input type="date" id="modalFechaNacimiento" placeholder="Fecha de Nacimiento">
+            <input type="email" id="modalCorreoElectronico" placeholder="Tu Correo Electrónico">
+            
+            <button onclick="submitModalData()">CONFIRMAR Y PAGAR SERVICIO</button>
+            <p id="modalError" style="color: #ff69b4; margin-top: 10px; font-size: 0.9em;"></p>
+        </div>
+    </div>
+    
+    <div id="dreamModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('dreamModal')">&times;s</span>
+            <h2 style="text-align: center;">💭 SOÑADOR</h2>
+            <p style="color: #666; text-align: center; margin-bottom: 10px;">Escribe tu sueño y guárdalo. Si quieres interpretación, puedes enviarlo.</p>
+            
+            <textarea id="dreamText" rows="5" placeholder="Copia aquí el sueño que recuerdas..."></textarea>
+            
+            <button class="action-button" onclick="saveDream()">GUARDAR SUEÑO (Solo en tu App)</button>
+            
+            <hr style="border: 0; height: 1px; background-color: #ffb6c1; margin: 15px 0;">
+
+            <p style="color: #ff69b4; text-align: center; font-weight: bold;">¿QUIERES INTERPRETACIÓN?</p>
+            <p style="color: #666; text-align: center; font-size: 0.9em;">Envía tu sueño para ser analizado por nuestra Guardiana. El pago es por voluntad (lo que sientas).</p>
+            
+            <button class="action-button tarot" onclick="sendDreamForInterpretation()">
+                ENVIAR Y PAGAR VOLUNTAD (WhatsApp)
+            </button>
+        </div>
+    </div>
+
+    <div id="tarotModal" class="modal">
+        <div class="modal-content" id="tarotModalContent">
+            <span class="close" onclick="closeModal('tarotModal')">&times;</span>
+            <h2 style="text-align: center;">🃏 Lectura Personal</h2>
+            <p style="color: #666; text-align: center;">Introduce tus datos y tu pregunta para recibir tu **Guía Gratuita** y acceder a la lectura completa de pago.</p>
+            
+            <input type="text" id="tarotNombre" placeholder="Tu Nombre">
+            <input type="date" id="tarotFechaNacimiento" placeholder="Fecha de Nacimiento">
+            <input type="email" id="tarotCorreoElectronico" placeholder="Tu Correo Electrónico">
+            <textarea id="tarotPregunta" rows="3" placeholder="Escribe aquí tu pregunta."></textarea>
+
+            <button class="action-button tarot" onclick="processTarotReading()">REVELAR GUÍA GRATUITA</button>
+            <p id="tarotModalError" style="color: #ff69b4; margin-top: 10px; font-size: 0.9em;"></p>
+        </div>
+    </div>
+
+
+    <script>
+        // Configuración de la API de Gemini
+        const apiKey = ""; 
+        const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
+        
+        // NOMBRES DE LAS PESTAÑAS
+        const TABS = ["CALENDARIO", "AFIRMACIONES", "TU ESPACIO", "CONTACTO"];
+        const TAB_IDS = ["calendario", "afirmaciones", "tu_espacio", "contacto"];
+        
+        // Lista de Afirmaciones (con URLs de imágenes de ejemplo)
+        const AFIRMACIONES_ORACULO = [
+            { img: 'afirmacion_01.jpg', concepto: 'CONFIANZA', color: 'blue', mensaje: 'Ganesha te susurra: Tus habilidades son suficientes para superar cualquier obstáculo. ¡Confía en ti mismo!' },
+            { img: 'afirmacion_02.jpg', concepto: 'PACIENCIA', color: 'yellow', mensaje: 'El elefante sagrado te recuerda: Deja que el camino se revele. La prisa es un obstáculo; la paciencia es una bendición.' },
+            { img: 'afirmacion_03.jpg', concepto: 'PROSPERIDAD', color: 'green', mensaje: 'Ganesha bendice tu abundancia: Un nuevo ciclo de prosperidad está comenzando en tu vida financiera.' },
+            { img: 'afirmacion_04.jpg', concepto: 'CALMA', color: 'purple', mensaje: 'La sabiduría de Ganesha te guía: La calma es tu superpoder. No reacciones, observa y actúa con paz.' },
+            { img: 'afirmacion_05.jpg', concepto: 'AMOR PROPIO', color: 'pink', mensaje: 'Ganesha te dice: El amor que buscas reside en tu propio corazón. Ábrete a recibirlo de ti mismo.' },
+            { img: 'afirmacion_06.jpg', concepto: 'LIBERACIÓN', color: 'brown', mensaje: 'El removedor de obstáculos te libera: Suelta el control. Las cargas que llevas no son tuyas, devuélvelas al universo.' },
+            { img: 'afirmacion_07.jpg', concepto: 'PROTECCIÓN', color: 'red', mensaje: 'Ganesha te sonríe: Estás protegido. No hay fuerza externa que pueda detener tu camino.' }
+        ];
+
+        // Lista de Arcanos para el Tarot Gratuito
+        const ARCANOS_MAYORES = [
+            { nombre: "El Mago", lectura: "Iniciativa, habilidad y potencial. Tienes el poder de crear." },
+            { nombre: "La Sacerdotisa", lectura: "Intuición, misterio y conocimiento oculto. Escucha tu voz interior." },
+            { nombre: "La Emperatriz", lectura: "Abundancia, creatividad y fertilidad. Momento de dar a luz ideas." },
+            { nombre: "El Emperador", lectura: "Autoridad, estructura y control. Necesitas orden y disciplina." },
+            { nombre: "El Sumo Sacerdote", lectura: "Tradición, guía y sabiduría. Busca el consejo de un mentor." },
+            { nombre: "Los Enamorados", lectura: "Decisión, elección y unión. El camino del corazón es el correcto." },
+            { nombre: "El Carro", lectura: "Victoria, determinación y avance. Mantén el enfoque en la meta." },
+            { nombre: "La Justicia", lectura: "Equilibrio, verdad y causa-efecto. Lo justo está por manifestarse." },
+            { nombre: "El Ermitaño", lectura: "Introspección, soledad y búsqueda interior. Tómate un tiempo para reflexionar." },
+            { nombre: "La Rueda de la Fortuna", lectura: "Cambio de suerte, ciclos y destino. La vida te trae un giro positivo." },
+            { nombre: "La Fuerza", lectura: "Coraje, paciencia y dominio de uno mismo. Usa la fuerza interior con suavidad." },
+            { nombre: "El Colgado", lectura: "Sacrificio, perspectiva y dejar ir. Debes ver las cosas desde otro ángulo." },
+            { nombre: "La Muerte", lectura: "Transformación, final y nuevo comienzo. Libera lo que ya no sirve." },
+            { nombre: "La Templanza", lectura: "Armonía, moderación y paciencia. Equilibrio entre extremos." },
+            { nombre: "El Diablo", lectura: "Tentación, atadura y materialismo. Enfrenta tus miedos." },
+            { nombre: "La Torre", lectura: "Destrucción de viejas estructuras, liberación y revelación súbita. Un cambio necesario." },
+            { nombre: "La Estrella", lectura: "Esperanza, inspiración y serenidad. El futuro es brillante." },
+            { nombre: "La Luna", lectura: "Ilusión, intuición profunda y miedo a lo desconocido. Confía en tus sueños." },
+            { nombre: "El Sol", lectura: "Alegría, éxito y vitalidad. Período de claridad y felicidad." },
+            { nombre: "El Juicio", lectura: "Renacimiento, evaluación y despertar. Es hora de tomar decisiones importantes." },
+            { nombre: "El Mundo", lectura: "Culminación, realización e integración. Has completado un ciclo importante." },
+            { nombre: "El Loco", lectura: "Nuevos comienzos, espontaneidad y fe ciega. Atrévete a dar el primer paso." }
+        ];
+
+        // Estado global para el calendario
+        let currentMonth = new Date().getMonth();
+        let currentYear = new Date().getFullYear();
+
+
+        // --- LÓGICA DE NAVEGACIÓN, FASES Y UTILIDADES ---
+
+        function renderNavbar() {
+            const navbar = document.getElementById('navbar');
+            navbar.innerHTML = '';
+            TABS.forEach((name, index) => {
+                const id = TAB_IDS[index];
+                const item = document.createElement('div');
+                item.classList.add('navbar-item');
+                const iconMap = { "CALENDARIO": '🗓️', "AFIRMACIONES": '💖', "TU ESPACIO": '🧘‍♀️', "CONTACTO": '💬' };
+                item.innerHTML = `<span>${iconMap[name]}</span>${name}`;
+                item.onclick = () => mostrarSeccion(id);
+                navbar.appendChild(item);
+            });
+            mostrarSeccion(TAB_IDS[0]);
+        }
+
+        function mostrarSeccion(seccionId) {
+            const contenidos = document.querySelectorAll('.content');
+            contenidos.forEach(c => c.classList.remove('active'));
+            document.getElementById(seccionId).classList.add('active');
+
+            const items = document.querySelectorAll('.navbar-item');
+            items.forEach(item => item.classList.remove('active'));
+            const index = TAB_IDS.indexOf(seccionId);
+            if (index !== -1) {
+                document.getElementById('navbar').children[index].classList.add('active');
+            }
+            
+            // Lógica específica al cambiar de pestaña
+            if (seccionId === 'afirmaciones') {
+                resetAfirmacionCard();
+            }
+        }
+
+        function getFaseLunar(fechaActual) {
+            const referencia = new Date('2000-01-01'); 
+            const diffDias = (fechaActual - referencia) / (1000 * 60 * 60 * 24);
+            const ciclo = 29.53059;
+            const diaCiclo = diffDias % ciclo;
+            
+            if (diaCiclo <= 1.84 || diaCiclo >= 27.69) return { nombre: 'Luna Nueva', simbolo: '🌑' };
+            if (diaCiclo > 1.84 && diaCiclo <= 5.53) return { nombre: 'Creciente Cóncava', simbolo: '🌒' };
+            if (diaCiclo > 5.53 && diaCiclo <= 9.22) return { nombre: 'Cuarto Creciente', simbolo: '🌓' };
+            if (diaCiclo > 9.22 && diaCiclo <= 12.91) return { nombre: 'Gibosa Creciente', simbolo: '🌔' };
+            if (diaCiclo > 12.91 && diaCiclo <= 16.61) return { nombre: 'Luna Llena', simbolo: '🌕' };
+            if (diaCiclo > 16.61 && diaCiclo <= 20.30) return { nombre: 'Gibosa Menguante', simbolo: '🌖' };
+            if (diaCiclo > 20.30 && diaCiclo <= 23.99) return { nombre: 'Cuarto Menguante', simbolo: '🌗' };
+            if (diaCiclo > 23.99 && diaCiclo <= 27.69) return { nombre: 'Menguante Cóncava', simbolo: '🌘' };
+            
+            return { nombre: 'Error', simbolo: '❓' };
+        }
+
+        function actualizarFaseLunar() {
+            const hoy = new Date();
+            const fase = getFaseLunar(hoy);
+            const opcionesFecha = { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit', hour12: false };
+            const fechaFormateada = hoy.toLocaleDateString('es-ES', opcionesFecha);
+
+            const moonSymbolElement = document.getElementById('moonSymbol');
+            const faseLunarActualElement = document.getElementById('faseLunarActual');
+            const fechaActualElement = document.getElementById('fechaActual');
+            
+            if (moonSymbolElement) moonSymbolElement.textContent = fase.simbolo;
+            if (faseLunarActualElement) faseLunarActualElement.textContent = fase.nombre;
+            if (fechaActualElement) fechaActualElement.textContent = fechaFormateada;
+        }
+
+        async function obtenerInfluenciaDiaria(button) {
+            const loadingElement = document.getElementById('astrologyLoading');
+            const influenciaPlanetariaElement = document.getElementById('influenciaPlanetaria');
+            const influenciaColorElement = document.getElementById('influenciaColor');
+            const influenciaMensajeElement = document.getElementById('influenciaMensaje');
+
+            // Limpiar resultados anteriores
+            influenciaPlanetariaElement.textContent = 'Planeta Regente:';
+            influenciaColorElement.textContent = 'Color de Poder:';
+            influenciaMensajeElement.textContent = 'Mensaje Místico:';
+
+            loadingElement.style.display = 'block';
+            button.disabled = true;
+
+            const hoy = new Date().toLocaleDateString('es-ES', { day: 'numeric', month: 'long', year: 'numeric' });
+            const fase = getFaseLunar(new Date()).nombre;
+
+            const systemPrompt = `Eres un astrólogo experto. Genera una predicción astrológica en JSON conciso para ${hoy}. Incluye el Planeta Regente, el Color que influye y un Mensaje Místico de máximo 15 palabras.`;
+            const userQuery = `Dime la influencia astrológica para hoy, ${hoy}, durante la fase de ${fase}.`;
+
+            const payload = {
+                contents: [{ parts: [{ text: userQuery }] }],
+                systemInstruction: { parts: [{ text: systemPrompt }] },
+                generationConfig: {
+                    responseMimeType: "application/json",
+                    responseSchema: {
+                        type: "OBJECT",
+                        properties: {
+                            "planetaRegente": { "type": "STRING" },
+                            "color": { "type": "STRING" },
+                            "mensaje": { "type": "STRING" }
+                        }
+                    }
+                }
+            };
+            
+            try {
+                const response = await fetch(apiUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+                
+                if (!response.ok) throw new Error(`API error: ${response.statusText}`);
+                
+                const result = await response.json();
+                const jsonText = result.candidates?.[0]?.content?.parts?.[0]?.text;
+                
+                if (!jsonText) throw new Error("Respuesta JSON vacía.");
+                
+                const data = JSON.parse(jsonText);
+                
+                influenciaPlanetariaElement.textContent = `Planeta Regente: ${data.planetaRegente}`;
+                influenciaColorElement.textContent = `Color de Poder: ${data.color}`;
+                influenciaMensajeElement.textContent = `Mensaje Místico: ${data.mensaje}`;
+
+            } catch (error) {
+                console.error("Error al obtener la influencia:", error);
+                influenciaPlanetariaElement.textContent = 'Planeta Regente: ERROR';
+                influenciaMensajeElement.textContent = 'Mensaje Místico: No se pudo generar la predicción.';
+            } finally {
+                loadingElement.style.display = 'none';
+                button.disabled = false;
+            }
+        }
+
+        async function obtenerHoroscopoGratis() {
+            const nombre = document.getElementById('nombreHoroscopo').value.trim();
+            const fecha = document.getElementById('fechaHoroscopo').value;
+            const loadingElement = document.getElementById('horoscopoLoading');
+            const resultadoDiv = document.getElementById('horoscopo-resultado');
+            
+            if (!nombre || !fecha) {
+                alert("Por favor, introduce tu Nombre y Fecha de Nacimiento.");
+                return;
+            }
+            
+            loadingElement.style.display = 'block';
+            resultadoDiv.style.display = 'none';
+            
+            const signo = calcularSigno(fecha);
+            const hoy = new Date().toLocaleDateString('es-ES', { day: 'numeric', month: 'long', year: 'numeric' });
+            
+            const systemPrompt = `Eres un astrólogo personal que ofrece una predicción concisa y alentadora. Responde directamente con el saludo y la predicción para ${signo} en un tono místico.`;
+            const userQuery = `Hola ${nombre}, mi signo es ${signo}. Dame el Horóscopo diario gratuito para hoy, ${hoy}. Máximo 25 palabras.`;
+
+            const payload = {
+                contents: [{ parts: [{ text: userQuery }] }],
+                systemInstruction: { parts: [{ text: systemPrompt }] },
+            };
+            
+            try {
+                const response = await fetch(apiUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+                
+                if (!response.ok) throw new Error(`API error: ${response.statusText}`);
+                
+                const result = await response.json();
+                const prediccion = result.candidates?.[0]?.content?.parts?.[0]?.text || "No se pudo generar la predicción mística.";
+                
+                document.getElementById('signoResult').textContent = signo;
+                document.getElementById('prediccionResult').textContent = prediccion;
+                
+                resultadoDiv.style.display = 'block';
+            } catch (error) {
+                console.error("Error al obtener Horóscopo:", error);
+                document.getElementById('prediccionResult').textContent = 'Error: No se pudo conectar con el Cosmos.';
+                resultadoDiv.style.display = 'block';
+            } finally {
+                loadingElement.style.display = 'none';
+            }
+        }
+        
+        function prepararTarotGratis() {
+            const nombre = localStorage.getItem('usuarioNombre');
+            
+            // 1. Mostrar la alerta pidiendo la pregunta (NO requiere usuario conectado)
+            if (window.confirm("¡Concentra tu energía! Piensa una pregunta clave. Después de aceptar, revelaremos tu carta.")) {
+                // 2. Si acepta, muestra la carta aleatoria
+                sacarCartaGratis(nombre || "Usuario"); 
+            }
+        }
+
+        function sacarCartaGratis(nombre) {
+            const randomIndex = Math.floor(Math.random() * ARCANOS_MAYORES.length);
+            const carta = ARCANOS_MAYORES[randomIndex];
+            
+            // Usamos alert para mostrar el resultado
+            alert(`¡CARTA GRATUITA REVELADA!\n\nArcano: ${carta.nombre}\nLectura: ${carta.lectura}\n\n✨ Esta fue tu guía personal. ¡La próxima lectura (0.99€) está en SERVICIOS!`);
+        }
+
+
+        // --- 3. LÓGICA DE CALENDARIO VISUAL ---
+        
+        function renderCalendarGrid(month, year) {
+            const grid = document.getElementById('calendarGrid');
+            const header = document.getElementById('currentMonthYear');
+            const date = new Date(year, month, 1);
+            const today = new Date();
+            grid.innerHTML = '';
+            
+            const monthNames = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
+            const dayNames = ['Dom', 'Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb'];
+
+            header.textContent = `${monthNames[month]} ${year}`;
+
+            dayNames.forEach(day => {
+                const dayName = document.createElement('div');
+                dayName.classList.add('day-name');
+                dayName.textContent = day;
+                grid.appendChild(dayName);
+            });
+
+            const startingDay = date.getDay();
+            const daysInMonth = new Date(year, month + 1, 0).getDate();
+
+            for (let i = 0; i < startingDay; i++) {
+                grid.appendChild(document.createElement('div'));
+            }
+
+            for (let i = 1; i <= daysInMonth; i++) {
+                const dayNumber = document.createElement('div');
+                dayNumber.classList.add('day-number');
+                dayNumber.textContent = i;
+                
+                if (i === today.getDate() && month === today.getMonth() && year === today.getFullYear()) {
+                    dayNumber.classList.add('current-day');
+                }
+
+                grid.appendChild(dayNumber);
+            }
+        }
+
+        function changeMonth(step) {
+            currentMonth += step;
+            if (currentMonth > 11) {
+                currentMonth = 0;
+                currentYear++;
+            } else if (currentMonth < 0) {
+                currentMonth = 11;
+                currentYear--;
+            }
+            renderCalendarGrid(currentMonth, currentYear);
+        }
+
+        // --- 4. LÓGICA DE SESIÓN Y MODAL ---
+        
+        function openModal(modalId, serviceId) {
+            localStorage.setItem('currentServiceId', serviceId); 
+            document.getElementById(modalId).style.display = 'block';
+            if (modalId === 'accessModal') {
+                document.getElementById('modalError').textContent = '';
+            }
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = 'none';
+        }
+        
+        // Función para abrir el modal de sueños
+        function openDreamModal() {
+            document.getElementById('dreamText').value = '';
+            openModal('dreamModal', 'DREAM_LOG'); 
+        }
+
+        function saveDream() {
+            const dreamText = document.getElementById('dreamText').value.trim();
+            if (dreamText === '') {
+                alert('Escribe tu sueño antes de guardarlo.');
+                return;
+            }
+            // Esto solo lo guarda en el navegador del cliente.
+            const dreams = JSON.parse(localStorage.getItem('dreams') || '[]');
+            dreams.push({ date: new Date().toISOString().split('T')[0], text: dreamText });
+            localStorage.setItem('dreams', JSON.stringify(dreams));
+            alert('¡Sueño guardado! Revisa la consola (F12) para verlo.');
+            closeModal('dreamModal');
+        }
+
+        function sendDreamForInterpretation() {
+            const dreamText = document.getElementById('dreamText').value.trim();
+            if (dreamText === '') {
+                alert('Debes escribir un sueño para la interpretación.');
+                return;
+            }
+
+            // Codificar el mensaje de WhatsApp con el sueño y la solicitud de voluntad
+            const encodedDream = encodeURIComponent(dreamText);
+            const whatsappMessage = `Hola, quiero una interpretación de mi sueño por voluntad. Mi sueño es: ${encodedDream}`;
+            
+            // Redirigir a PayPal primero (pago por voluntad)
+            const paypalLink = 'https://www.paypal.com/paypalme/heramancias'; 
+            window.open(paypalLink, '_blank');
+            
+            // Redirigir a WhatsApp
+            setTimeout(() => {
+                window.open(`https://wa.me/34666636723?text=${whatsappMessage}`, '_blank');
+            }, 1000); // Dar tiempo para que PayPal abra primero
+
+            closeModal('dreamModal');
+            alert('Abre PayPal para realizar tu pago por voluntad y luego WhatsApp para enviarme el sueño.');
+        }
+
+
+        function isValidEmail(email) {
+            const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+            return re.test(String(email).toLowerCase());
+        }
+
+        function calcularSigno(fecha) {
+            const date = new Date(fecha);
+            const mes = date.getMonth() + 1;
+            const dia = date.getDate();
+
+            if ((mes === 3 && dia >= 21) || (mes === 4 && dia <= 19)) return 'Aries ♈';
+            if ((mes === 4 && dia >= 20) || (mes === 5 && dia <= 20)) return 'Tauro ♉';
+            if ((mes === 5 && dia >= 21) || (mes === 6 && dia <= 20)) return 'Géminis ♊';
+            if ((mes === 6 && dia >= 21) || (mes === 7 && dia <= 22)) return 'Cáncer ♋';
+            if ((mes === 7 && dia >= 23) || (mes === 8 && dia <= 22)) return 'Leo ♌';
+            if ((mes === 8 && dia >= 23) || (mes === 9 && dia <= 22)) return 'Virgo ♍';
+            if ((mes === 9 && dia >= 23) || (mes === 10 && dia <= 22)) return 'Libra ♎';
+            if ((mes === 10 && dia >= 23) || (mes === 11 && dia <= 21)) return 'Escorpio ♏';
+            if ((mes === 11 && dia >= 22) || (mes === 12 && dia <= 21)) return 'Sagitario ♐';
+            if ((mes === 12 && dia >= 22) || (mes === 1 && dia <= 19)) return 'Capricornio ♑';
+            if ((mes === 1 && dia >= 20) || (mes === 2 && dia <= 18)) return 'Acuario ♒';
+            if ((mes === 2 && dia >= 19) || (mes === 3 && dia <= 20)) return 'Piscis ♓';
+            return 'No Definido';
+        }
+
+        function submitModalData() {
+            const nombre = document.getElementById('modalNombre').value.trim();
+            const fecha = document.getElementById('modalFechaNacimiento').value;
+            const email = document.getElementById('modalCorreoElectronico').value.trim();
+            const modalError = document.getElementById('modalError');
+            const serviceId = localStorage.getItem('currentServiceId');
+
+            if (!nombre || !fecha || !email) {
+                modalError.textContent = "Rellena todos los campos.";
+                return;
+            }
+            if (!isValidEmail(email)) {
+                modalError.textContent = "Introduce un correo electrónico válido.";
+                return;
+            }
+
+            const signo = calcularSigno(fecha);
+
+            localStorage.setItem('usuarioNombre', nombre);
+            localStorage.setItem('usuarioSigno', signo);
+            
+            // Lógica de Redirección (PAGO de suscripción)
+            alert(`¡Datos registrados! Tu signo es ${signo}. Serás redirigido a PayPal para pagar el servicio: ${serviceId}.`);
+            window.open('https://www.paypal.com/paypalme/heramancias', '_blank');
+            closeModal('accessModal');
+        }
+
+        // Función para abrir el modal de Tarot (Botón TAROT)
+        function openTarotModal() {
+            document.getElementById('tarotModal').style.display = 'block';
+        }
+
+        function processTarotReading() {
+            const nombre = document.getElementById('tarotNombre').value.trim();
+            const fecha = document.getElementById('tarotFechaNacimiento').value;
+            const email = document.getElementById('tarotCorreoElectronico').value.trim();
+            const pregunta = document.getElementById('tarotPregunta').value.trim();
+            const modalError = document.getElementById('tarotModalError');
+
+            if (!nombre || !fecha || !email || !pregunta) {
+                modalError.textContent = "Rellena todos los campos y tu pregunta.";
+                return;
+            }
+            if (!isValidEmail(email)) {
+                modalError.textContent = "Introduce un correo electrónico válido.";
+                return;
+            }
+
+            // Simulación de la Carta 1 (Guía Gratuita)
+            const randomIndex = Math.floor(Math.random() * ARCANOS_MAYORES.length);
+            const carta1 = ARCANOS_MAYORES[randomIndex];
+
+            const modalContent = document.getElementById('tarotModalContent');
+
+            // 1. Mostrar la Carta 1 y el Muro de Pago
+            modalContent.innerHTML = `
+                <span class="close" onclick="closeModal('tarotModal')">&times;</span>
+                <h2 style="text-align: center;">✨ TU GUÍA GRATUITA REVELADA ✨</h2>
+                
+                <div id="tarotResultado">
+                    <h4>CARTA 1: ${carta1.nombre}</h4>
+                    <p style="color: #333;">${carta1.lectura}</p>
+                </div>
+
+                <hr style="border: 0; height: 1px; background-color: #ffb6c1; margin: 15px 0;">
+
+                <h3 style="color: #ff69b4; text-align: center;">Lectura Completa (3 Cartas)</h3>
+                <p style="color: #666; font-weight: bold; text-align: center;">Precio: 3.00€</p>
+                <p style="color: #666; font-size: 0.9em; text-align: center;">Haz el pago y te enviaré las Cartas 2 y 3 con la interpretación completa de tu pregunta.</p>
+
+                <button class="action-button tarot" onclick="payAndContactTarot('${nombre}', '${email}', '${pregunta}')">
+                    1. PAGAR 3.00€ AHORA (PayPal)
+                </button>
+                <button class="action-button" style="background-color: #25d366; color: white; margin-top: 5px;" onclick="alert('Completa el pago primero para enviar el mensaje.')">
+                    2. ENVIAR DATOS POR WHATSAPP
+                </button>
+            `;
+        }
+        
+        function payAndContactTarot(nombre, email, pregunta) {
+            // 1. Redirigir a PayPal (PAGO)
+            window.open('https://www.paypal.com/paypalme/heramancias', '_blank');
+
+            // 2. Redirigir a WhatsApp con los datos
+            const whatsappMessage = `Hola, he realizado el pago de 3.00€ por la Lectura de 3 Cartas. Mis datos son:\n- Nombre: ${nombre}\n- Correo: ${email}\n- Pregunta: ${pregunta}`;
+            
+            setTimeout(() => {
+                window.open(`https://wa.me/34666636723?text=${encodeURIComponent(whatsappMessage)}`, '_blank');
+            }, 1500); // Pequeña espera para que PayPal abra primero
+
+            closeModal('tarotModal');
+        }
+
+
+        // --- LÓGICA DE AFIRMACIONES ---
+        function resetAfirmacionCard() {
+            const cardContainer = document.getElementById('cardContainer');
+            document.getElementById('sacarCartaBtn').style.display = 'block'; // Muestra el botón de sacar carta
+            document.getElementById('afirmacionPaywall').style.display = 'none'; // Oculta el muro de pago
+            cardContainer.innerHTML = `
+                <p style="font-weight: bold; color: #ff69b4;">Toca el botón para recibir tu mensaje.</p>
+                <p style="font-size: 0.9em; color: #666;">Afirmaciones positivas y guía visual de los Susurros del Dios Ganesha.</p>`;
+        }
+
+        function sacarCartaAfirmacion(button) {
+            const cardContainer = document.getElementById('cardContainer');
+            const randomIndex = Math.floor(Math.random() * AFIRMACIONES_ORACULO.length);
+            const carta = AFIRMACIONES_ORACULO[randomIndex];
+            
+            // Asigna el color del borde de la tarjeta
+            cardContainer.style.borderColor = carta.color;
+
+            // Define el dibujo (usando un emoji como símbolo de Ganesha temporal)
+            const ganeshaIcon = '🐘';
+            const drawing = `<div class="afirmacion-figure" style="border-color: ${carta.color}; color: ${carta.color};">${ganeshaIcon}</div>`;
+
+
+            cardContainer.innerHTML = `
+                ${drawing}
+                <p style="font-size: 1.3em; font-weight: bold; color: ${carta.color};">CONCEPTO: ${carta.concepto}</p>
+                <p class="afirmacion-text">${carta.mensaje}</p>
+                <p style="font-size: 0.8em; color: #666;">*Guarda esta afirmación en tu corazón.</p>
+            `;
+            
+            // Lógica del Muro de Pago: Ocultar el botón de carta y mostrar el muro
+            button.style.display = 'none';
+            document.getElementById('afirmacionPaywall').style.display = 'block';
+        }
+
+        // --- 5. LÓGICA DE INICIO Y CALENDARIO ---
+        
+        function cargarApp() {
+            actualizarFaseLunar(); 
+            renderNavbar();
+            renderCalendarGrid(currentMonth, currentYear);
+        }
+
+        window.onload = cargarApp;
+    </script>
+</body>
+</html>
